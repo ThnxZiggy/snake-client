@@ -1,32 +1,8 @@
 const net = require('net');
+const connect = require('./client');
 
 // establishes a connection with the game server
-const connect = function () {
-  const conn = net.createConnection({
-    host: '165.227.47.243',
-    port: '50541'
-  });
 
-  // interpret incoming data as text
-  conn.setEncoding('utf8');
-  conn.on('data', (data) => {
-    console.log(data.toString())
-  })
-
-  conn.on('connect', () => {
-    console.log('connected')
-    conn.write('Name: Zig')
-    setInterval(() => {conn.write('Move: up')}, 500)
-    setTimeout(() => {conn.write('Move: up')}, 500)
-    setTimeout(() => {conn.write('Move: up')}, 500)
-    conn.write('Move: left')
-    conn.write("Move: left")
-    conn.write('Move: down')
-    setTimeout(() => {conn.write('Move: right')}, 500)
-  })
-
-  return conn;
-};
 
 console.log("connecting...");
 connect();
@@ -38,12 +14,16 @@ const setupInput = function () {
   stdin.setEncoding("utf8");
   stdin.resume();
   stdin.on("data", (handleUserInput) => {
-
+    if (handleUserInput === '\u0003'){
+      process.stdout.write('exited game\n')
+      process.exit();
+    }
   });
+
+
   return stdin;
 };
 
+setupInput();
 
-module.exports = {
-  connect
-}
+module.exports = {net}

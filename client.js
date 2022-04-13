@@ -16,7 +16,6 @@ const connect = function () {
   conn.on('connect', () => {
     console.log('connected')
     conn.write('Name: Zig')
-    setInterval(() => {conn.write('Move: up')}, 250)
   })
 
   return conn;

@@ -1,5 +1,5 @@
 const net = require('net');
-const setupInput = require('./play');
+const setupInput = require('./input');
 
 const connect = function () {
   const conn = net.createConnection({
@@ -24,4 +24,4 @@ const connect = function () {
 
 
 
-module.exports = connect
+module.exports = {connect}

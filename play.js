@@ -19,4 +19,6 @@ const connect = function () {
 console.log("connecting...");
 connect();
 
-module.exports = connect;
+module.exports = {
+  connect
+}
